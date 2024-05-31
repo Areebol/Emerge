@@ -1,0 +1,6 @@
+model_familys:
+- qwen_1
+data_loaders:
+- CotLoader
+- HC3HumanLoader
+- XsumLoader
