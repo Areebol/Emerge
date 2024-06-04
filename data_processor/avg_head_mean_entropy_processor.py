@@ -3,19 +3,22 @@ from utils.meter import AverageMeter
 import os
 import csv
 import logging
+import torch
+from utils.process_data import get_attention_entropy
 
-class MeanEntropyProcessor(BaseProcessor):
+class AvgHeadMeanEntropyProcessor(BaseProcessor):
+    """对多头的attention matrix求平均再计算熵值"""
     def __init__(self, model, tokenizer, model_config):
         BaseProcessor.__init__(self, model, tokenizer, model_config)
-        self.name = "MeanEntropyProcessor"
-        logging.info("Init MeanEntropyProcessor")
+        self.name = "AvgHeadMeanEntropyProcessor"
+        logging.info("Init AvgHeadMeanEntropyProcessor")
         self.total_entropy = AverageMeter()
 
     def process_data(self, index, data, model_generate,split_words=None):
         logging.info(f"{self.name} process data")
-        res_entropy = model_generate['entropy']
-        num_input_tokens = res_entropy[0].__len__()
-        num_heads = res_entropy.shape[0]
+        attentions = model_generate["attentions"][0][0].to('cpu') # shape = (bs_size,#heads,len,len)
+        avg_attention= torch.mean(attentions,dim=1) # shape = (bs_size,len,len)
+        res_entropy = get_attention_entropy(avg_attention) # shape = (bs_size,len)
         mean_entropy = res_entropy[:,1:].mean()
         self.total_entropy.update(mean_entropy)
         return mean_entropy.item()
@@ -31,7 +34,7 @@ class MeanEntropyProcessor(BaseProcessor):
     
     def set(self, data_type):
         self.data_type = data_type
-        self.save_dir = self.exp_dir + "/MeanEntropy" + f"/{self.data_type}"
+        self.save_dir = self.exp_dir + "/AvgHeadMeanEntropy" + f"/{self.data_type}"
         BaseProcessor.set(self)
     
     def reset(self):

@@ -36,7 +36,7 @@ def load_sentence_levels(model_configs,data_type):
                 # 逐行读取CSV文件的内容
                 for row in csvreader:
                     sentence_entropys = ast.literal_eval(row[1])
-                    sentence_entropy.update(sum(sentence_entropys)/len(sentence_entropys))
+                    sentence_entropy.update(sum(sentence_entropys[1:])/(len(sentence_entropys)-1))
             sentence_levels.append(sentence_entropy.avg)
         except FileNotFoundError:
             print(f"{model_config[0]} not sentence_level")

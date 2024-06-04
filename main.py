@@ -1,8 +1,7 @@
 from utils.load_model import load_model_tokenizer
 from utils.load_config import load_config
 import data_loader
-from data_processor.mean_entropy_processor import MeanEntropyProcessor
-from data_processor.sentence_entropy_processor import SentenceEntropyProcessor
+import data_processor
 from pipeline.pipeline import Pipeline
 import logging
 import argparse
@@ -32,10 +31,10 @@ if __name__ == "__main__":
     # models
     for model_config in model_configs[args.start:args.start+1]:
         model, tokenizer = load_model_tokenizer(model_config=model_config)
-        # data loaders
+        # data loaders + data processors
         data_loaders = [getattr(data_loader,loader_name)() for loader_name in config['data_loaders']]
-        data_processors = [MeanEntropyProcessor(model,tokenizer,model_config),
-                           SentenceEntropyProcessor(model,tokenizer,model_config)]
+        data_processors = [getattr(data_processor,processor_name)(model, tokenizer, model_config) for processor_name in config['data_processors']]
+        # init pipeline
         pipeline = Pipeline(model,tokenizer,model_config,data_loaders,data_processors)
         # run
         pipeline.run()

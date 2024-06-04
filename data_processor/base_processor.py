@@ -8,14 +8,14 @@ class BaseProcessor:
         self.max_sample = 50
         self.exp_dir = "./exp"
         
-    def process(self, index, data, model_generate):
+    def process(self, index, data, model_generate,split_words=None):
         if index > self.max_sample:
             return False
-        processed_data = self.process_data(index, data, model_generate)
+        processed_data = self.process_data(index, data, model_generate,split_words=split_words)
         self.save_data(index, processed_data)
         return True
         
-    def process_data(self, data, model_generate):
+    def process_data(self, data, model_generate,split_words=None):
         raise NotImplementedError("Subclasses should implement this method.")
 
     def save_data(self, data):

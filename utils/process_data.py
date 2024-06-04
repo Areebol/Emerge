@@ -66,7 +66,7 @@ def response(tokenizer:AutoTokenizer, model:AutoModelForCausalLM, question:str, 
     return res
 
 
-def split_sentence(tokenizer,question,input_ids=None):
+def split_sentence(tokenizer,question,input_ids=None,split_words=['balls.','balls?','balls!','balls:','balls.\n','balls\n']):
     punctuation_id=(1 if 'Qwen' in tokenizer.name_or_path else 2)
     if input_ids is None:
         inputs = tokenizer(question, padding=False, return_tensors='pt')
@@ -74,18 +74,12 @@ def split_sentence(tokenizer,question,input_ids=None):
     else:
         input_ids = input_ids.cpu()
     indices = []
-    is_code=(True if 'Code' in tokenizer.name_or_path else False)
-    if is_code:
-        logging.info("Using Llama Code splits")
-    if is_code is False:
-        split_words = ['balls.','balls?','balls!','balls:']
-        indices += [torch.nonzero(torch.eq(input_ids,tokenizer(split_word,padding=False,return_tensors='pt')['input_ids'].squeeze()[punctuation_id].cpu())).reshape(-1) for split_word in split_words]
-    split_words = ['balls.\n','balls\n']
+    
     indices += [torch.nonzero(torch.eq(input_ids,tokenizer(split_word,padding=False,return_tensors='pt')['input_ids'].squeeze()[punctuation_id].cpu())).reshape(-1) for split_word in split_words]
     
     total_split = torch.cat(indices,dim=-1)
     sort_splits = torch.unique(torch.sort(total_split.view(-1)).values)
-    
+    logging.info(f"{split_words} {sort_splits}")
     return sort_splits
 
 def crop_inputs(inputs,max_input_token,split_ids):
@@ -105,14 +99,18 @@ def crop_inputs(inputs,max_input_token,split_ids):
     inputs['attention_mask'] = inputs['attention_mask'][:,:max_input_token]
     return inputs
 
-def get_model_generate(tokenizer:AutoTokenizer, model:AutoModelForCausalLM, question:str, max_new_tokens:int=1, layer:int=-1, max_input_token=None):
+def get_model_generate(tokenizer:AutoTokenizer, model:AutoModelForCausalLM, question:str, max_new_tokens:int=1, layer:int=-1, max_input_token=None, split_words=None):
     """返回对应层的每个token的entropy值"""
     gen_config = GenerationConfig(do_sample=False, num_beams=1,eos_token_id=tokenizer.eos_token_id,pad_token_id=tokenizer.eos_token_id)
     with torch.no_grad():
         inputs = tokenizer(question, padding=False, return_tensors='pt')
         # 裁剪输入token数目在400以内 针对70b超大模型
         if max_input_token:
-            split_ids = split_sentence(tokenizer=tokenizer,question=question)
+            if split_words:
+                split_ids = split_sentence(tokenizer=tokenizer,question=question,split_words=split_words)
+            else:
+                split_ids = split_sentence(tokenizer=tokenizer,question=question)
+                
             inputs = crop_inputs(inputs,max_input_token,split_ids)
         input_ids = inputs['input_ids'].cuda()
         assert input_ids.shape[0] == 1, "response_entropy暂时只能一个一个question的处理"
@@ -129,7 +127,8 @@ def get_model_generate(tokenizer:AutoTokenizer, model:AutoModelForCausalLM, ques
             "text": generated_text[0],
             "entropy": entropy_value,
             "prob_dim": prob_dim,
-            "input_ids": input_ids
+            "input_ids": input_ids,
+            "attentions": generate['attentions'], # attention 矩阵
         }
         return res
 
