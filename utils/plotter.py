@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
 from .meter import AverageMeter
+import os
+from utils.load_config import load_config
+from utils.load_data import load_token_levels, load_sentence_levels
 
 def _plot_sentence_token_level(title, model_configs, token_levels, sentence_levels,save_path=None):
     plt.figure(figsize=(16, 8))
@@ -62,3 +65,20 @@ def plot_sentence_entropy(title, model_configs,token_levels,sentence_levels):
         plt.suptitle(f"{title}",fontsize=32)
         plt.show()
         plt.close()
+        
+def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
+    model_cfg = "./config/models_jq.yaml"
+    # 加载模型s
+    model_configs = []
+    for key in model_familys:
+        model_configs += load_config(model_cfg)[f"paths_{key}"]
+    # 读取数据
+    _, token_levels = load_token_levels(model_configs,data_type)
+    models_configs, sentence_levels = load_sentence_levels(model_configs,data_type)
+    if models_configs:
+        save_path = f"./picture/tmp/{data_type}/{model_familys}"
+        os.makedirs(save_path,exist_ok=True)
+        # 绘图
+        plot_sentence_token_level("token_level_sentence_level",models_configs,token_levels,sentence_levels,save_path)
+        plot_level("token_level",model_configs,token_levels,save_path)
+        plot_level("sentence_level",model_configs,sentence_levels,save_path)

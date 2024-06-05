@@ -12,7 +12,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--cfg", default="./config/qwen1.yaml", help="config file path")
     parser.add_argument("--start", default = 0, type=int, help="config file path")
-    parser.add_argument("--model_cfg", default="./config/models.yaml", help="model config file path")
+    parser.add_argument("--model_cfg", default="./config/models_jq.yaml", help="model config file path")
     args = parser.parse_args()
 
     log_f = '%(asctime)s | %(filename)s[line:%(lineno)d] | %(levelname)s | %(message)s'
