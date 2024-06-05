@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from utils.plotter import plot_sentence_token_level
 from .meter import AverageMeter
 
 def _plot_sentence_token_level(title, model_configs, token_levels, sentence_levels,save_path=None):
