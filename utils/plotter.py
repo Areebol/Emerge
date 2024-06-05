@@ -22,8 +22,7 @@ def plot_sentence_token_level(title, model_configs, token_levels, sentence_level
     plt.figure(figsize=(16, 8))
     for model_config,token_level,sentence_level in zip(model_configs, token_levels, sentence_levels):
         fraction = AverageMeter()
-        for avg_token_levl,_sentence_level in zip(token_level,sentence_level):
-            avg_sentence_level = sum(_sentence_level[1:])/len(_sentence_level[1:])
+        for avg_token_levl,avg_sentence_level in zip(token_level,sentence_level):
             fraction.update((avg_token_levl/avg_sentence_level))
         plt.scatter(model_config[3], fraction.avg,label=model_config[0])
         plt.text(model_config[3],fraction.avg,model_config[0],fontsize=8,ha='left',va='bottom')
@@ -41,7 +40,7 @@ def plot_sentence_token_level(title, model_configs, token_levels, sentence_level
 def plot_level(title, model_configs,levels,save_path=None):
     plt.figure(figsize=(16, 8))
     for model_config,level in zip(model_configs, levels):
-        avg_level = sum(levels[1:]) / len(levels[1:])
+        avg_level = sum(level) / len(level)
         plt.scatter(model_config[3], avg_level,label=model_config[0])
         plt.text(model_config[3],avg_level,model_config[0],fontsize=8,ha='left',va='bottom')
     plt.legend()
