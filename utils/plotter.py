@@ -67,7 +67,11 @@ def plot_sentence_entropy(title, model_configs,token_levels,sentence_levels):
         plt.close()
         
 def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
+<<<<<<< HEAD
     model_cfg = "./config/models_jq.yaml"
+=======
+    model_cfg = "./config/models.yaml"
+>>>>>>> 56c2cd50fe3262bca6a0a278c8b03e3b3cff5a16
     # 加载模型s
     model_configs = []
     for key in model_familys:
