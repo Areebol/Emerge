@@ -1,18 +1,8 @@
 import matplotlib.pyplot as plt
+from utils.plotter import plot_sentence_token_level
+from .meter import AverageMeter
 
-def plot_sentence_token_level(title, model_configs, token_levels, sentence_levels,save_path=None):
-    plt.figure(figsize=(16, 8))
-    for model_config,token_level,sentence_level in zip(model_configs, token_levels, sentence_levels):
-        plt.scatter(model_config[3], token_level/sentence_level,label=model_config[0])
-        plt.text(model_config[3],token_level/sentence_level,model_config[0],fontsize=8,ha='left',va='bottom')
-    plt.legend()
-    plt.xlabel("params size")
-    plt.suptitle(title,fontsize=32)
-    if save_path:
-        plt.savefig(f"{save_path}/{title}_fraction.png")
-    plt.show()
-    plt.close()
-
+def _plot_sentence_token_level(title, model_configs, token_levels, sentence_levels,save_path=None):
     plt.figure(figsize=(16, 8))
     for model_config,token_level,sentence_level in zip(model_configs, token_levels, sentence_levels):
         plt.scatter(model_config[3], token_level,label=f"{model_config[0]}_token_level")
@@ -27,12 +17,33 @@ def plot_sentence_token_level(title, model_configs, token_levels, sentence_level
         plt.savefig(f"{save_path}/{title}.png")
     plt.show()
     plt.close()
+
+def plot_sentence_token_level(title, model_configs, token_levels, sentence_levels,save_path=None):
+    plt.figure(figsize=(16, 8))
+    for model_config,token_level,sentence_level in zip(model_configs, token_levels, sentence_levels):
+        fraction = AverageMeter()
+        for avg_token_levl,_sentence_level in zip(token_level,sentence_level):
+            avg_sentence_level = sum(_sentence_level[1:])/len(_sentence_level[1:])
+            fraction.update((avg_token_levl/avg_sentence_level))
+        plt.scatter(model_config[3], fraction.avg,label=model_config[0])
+        plt.text(model_config[3],fraction.avg,model_config[0],fontsize=8,ha='left',va='bottom')
+    plt.legend()
+    plt.xlabel("params size")
+    plt.suptitle(title,fontsize=32)
+    if save_path:
+        plt.savefig(f"{save_path}/{title}_fraction.png")
+    plt.show()
+    plt.close()
+
+    # _plot_sentence_token_level(title, model_configs, token_levels, sentence_levels,save_path)
+
     
 def plot_level(title, model_configs,levels,save_path=None):
     plt.figure(figsize=(16, 8))
     for model_config,level in zip(model_configs, levels):
-        plt.scatter(model_config[3], level,label=model_config[0])
-        plt.text(model_config[3],level,model_config[0],fontsize=8,ha='left',va='bottom')
+        avg_level = sum(levels[1:]) / len(levels[1:])
+        plt.scatter(model_config[3], avg_level,label=model_config[0])
+        plt.text(model_config[3],avg_level,model_config[0],fontsize=8,ha='left',va='bottom')
     plt.legend()
     plt.xlabel("params size")
     plt.suptitle(title,fontsize=32)

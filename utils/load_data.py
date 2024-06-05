@@ -8,15 +8,15 @@ def load_token_levels(model_configs,data_type):
     exist_model_configs = []
     for model_config in model_configs:
         load_file = f"{load_dir}/{model_config[0]}.csv"
-        token_entropy = AverageMeter()
+        token_entropy = []
         try:
             with open(load_file, newline='') as csvfile:
                 exist_model_configs.append(model_config)
                 csvreader = csv.reader(csvfile)
                 # 逐行读取CSV文件的内容
                 for row in csvreader:
-                    token_entropy.update(float(row[1]))
-            token_levels.append(token_entropy.avg)
+                    token_entropy.append(float(row[1]))
+            token_levels.append(token_entropy)
         except FileNotFoundError:
             print(f"{model_config[0]} not token_level")
     return exist_model_configs, token_levels
@@ -27,7 +27,7 @@ def load_sentence_levels(model_configs,data_type):
     exist_model_configs = []
     for model_config in model_configs:
         load_file = f"{load_dir}/{model_config[0]}.csv"
-        sentence_entropy = AverageMeter()
+        sentence_entropy = []
         try:
             with open(load_file, newline='') as csvfile:
                 print(f"loading file {load_file}")
@@ -36,8 +36,8 @@ def load_sentence_levels(model_configs,data_type):
                 # 逐行读取CSV文件的内容
                 for row in csvreader:
                     sentence_entropys = ast.literal_eval(row[1])
-                    sentence_entropy.update(sum(sentence_entropys[1:])/(len(sentence_entropys)-1))
-            sentence_levels.append(sentence_entropy.avg)
+                    sentence_entropy.append(sum(sentence_entropys[1:])/(len(sentence_entropys)-1))
+            sentence_levels.append(sentence_entropy)
         except FileNotFoundError:
             print(f"{model_config[0]} not sentence_level")
     return exist_model_configs, sentence_levels
