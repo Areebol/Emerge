@@ -81,15 +81,15 @@ paths_llama_code_python:
   - 70
 paths_qwen:
 - - qwen_0.5b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-0.5B/snapshots/8f445e3628f3500ee69f24e1303c9f10f5342a39
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-0.5B/snapshots/8f445e3628f3500ee69f24e1303c9f10f5342a39/
   - qwen
   - 0.5
 - - qwen_chat_0.5b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-0.5B-Chat/snapshots/f82bd3692de0283f4a4b31e06d164dd8467fb52e
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-0.5B-Chat/snapshots/4d14e384a4b037942bb3f3016665157c8bcb70ea/
   - qwen
   - 0.5
 - - qwen_1.8b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-1.8B/snapshots/7846de7ed421727b318d6605a0bfab659da2c067
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-1.8B/snapshots/7846de7ed421727b318d6605a0bfab659da2c067/
   - qwen
   - 1.8
 - - qwen_chat_1.8b
@@ -97,35 +97,35 @@ paths_qwen:
   - qwen
   - 1.8
 - - qwen_4b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-4B/snapshots/a66363a0c24e2155c561e4b53c658b1d3965474e
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-4B/snapshots/a66363a0c24e2155c561e4b53c658b1d3965474e/
   - qwen
   - 4
 - - qwen_chat_4b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-4B-Chat/snapshots/6c387a3d44376e831b82d82715e08dca04344e3a
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-4B-Chat/snapshots/a7a4d4945d28bac955554c9abd2f74a71ebbf22f/
   - qwen
   - 4
 - - qwen_7b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-7B/snapshots/831096e3a59a0789a541415da25ef195ceb802fe
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-7B/snapshots/831096e3a59a0789a541415da25ef195ceb802fe/
   - qwen
   - 7
 - - qwen_chat_7b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-7B-Chat/snapshots/5f4f5e69ac7f1d508f8369e977de208b4803444b
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-7B-Chat/snapshots/294483ad23713036574b30587b186713373f4271/
   - qwen
   - 7
 - - qwen_14b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-14B/snapshots/dce4b190d34470818e5bec2a92cb8233aaa02ca2
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-14B/snapshots/dce4b190d34470818e5bec2a92cb8233aaa02ca2/
   - qwen
   - 14
 - - qwen_chat_14b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-14B-Chat/snapshots/9492b22871f43e975435455f5c616c77fe7a50ec
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-14B-Chat/snapshots/79e31c0b5875db412a7db189514b523ec8440928/
   - qwen
   - 14
 - - qwen_32b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-32B/snapshots/cefef80dc06a65f89d1d71d0adbc56d335ca2490
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-32B/snapshots/cefef80dc06a65f89d1d71d0adbc56d335ca2490/
   - qwen
   - 32
 - - qwen_chat_32b
-  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-32B-Chat/snapshots/0997b012af6ddd5465d40465a8415535b2f06cfc
+  - /U_20240603_ZSH_SMIL/LLM/models--Qwen--Qwen1.5-32B-Chat/snapshots/0997b012af6ddd5465d40465a8415535b2f06cfc/
   - qwen
   - 32
 - - qwen_72b
