@@ -6,7 +6,8 @@ data_loaders:
 - XsumLoader
 - CotLoader
 data_processors:
-- AvgHeadMeanEntropyProcessor
+- AvgHeadSoftMaxMeanEntropyProcessor
+- AvgHeadUnSoftMaxMeanEntropyProcessor
 - MeanEntropyProcessor
 - SentenceEntropySoftMaxProcessor
 - SentenceEntropyUnSoftMaxProcessor

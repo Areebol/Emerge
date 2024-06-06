@@ -18,6 +18,7 @@ class MeanEntropyProcessor(BaseProcessor):
         num_heads = res_entropy.shape[0]
         mean_entropy = res_entropy[:,1:].mean()
         self.total_entropy.update(mean_entropy)
+        logging.info(mean_entropy.item())
         return mean_entropy.item()
 
     def append_data_to_csv(self, data):
