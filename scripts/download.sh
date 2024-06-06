@@ -8,11 +8,11 @@ num_iterations=100
 
 for ((i=1; i<=$num_iterations; i++)); do
     python scripts/model_download.py 
-    # program_pid=$!  # 获取程序的进程 ID
-    # # 等待固定时间
-    # sleep $duration
+    program_pid=$!  # 获取程序的进程 ID
+    # 等待固定时间
+    sleep $duration
 
-    # # 杀死程序进程
-    # kill $program_pid
-    # wait $program_pid 2>/dev/null  # 等待进程被杀死
+    # 杀死程序进程
+    kill $program_pid
+    wait $program_pid 2>/dev/null  # 等待进程被杀死
 done

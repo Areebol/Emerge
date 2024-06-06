@@ -68,12 +68,12 @@ if __name__ == "__main__":
                 # "Qwen/Qwen-72B-Chat",
                 # "Qwen/Qwen-72B",
                 "meta-llama/Llama-2-7b-hf",
-                "meta-llama/Llama-2-7b-chat-hf",
+                # "meta-llama/Llama-2-7b-chat-hf",
                 "meta-llama/Llama-2-13b-hf",
                 "meta-llama/Llama-2-13b-chat-hf",
                 "meta-llama/Llama-2-70b-hf",
                 "meta-llama/Llama-2-70b-chat-hf",
                 ]
     for repo_id in repo_ids:
-        snapshot_download(repo_id=repo_id,cache_dir=cache_dir)
+        snapshot_download(repo_id=repo_id,cache_dir=cache_dir,max_workers=2)
     

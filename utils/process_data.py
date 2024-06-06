@@ -285,7 +285,7 @@ def weighted_hidden_states(weights,token_ids,res):
     weighted_hidden_states = []
     for weight,token_id in zip(weights,token_ids):
         weighted_states = weight.view(1,-1,1).to(hidden_state.device) * hidden_state[:,token_id,:]
-        weighted_hidden_states.append(torch.mean(weighted_states,dim=1))
+        weighted_hidden_states.append(torch.sum(weighted_states,dim=1))
     return torch.stack(weighted_hidden_states,dim=1)
 
 def split_attn_matrix(model,res,sort_splits,soft_max=True):

@@ -61,9 +61,16 @@ class AvgHeadUnSoftMaxMeanEntropyProcessor(BaseProcessor):
         hidden_state = get_hidden_state_k(res,-2)
         # 手动计算最后一层的attention weight
         attentions = get_attention_matrix(encoder,hidden_state,soft_max=False).to(torch.float32).cpu() # shape = (bs_size,#heads,len,len)
-        avg_attention= torch.mean(attentions,dim=1) # shape = (bs_size,len,len)
+        avg_attention= torch.mean(attentions,dim=1).unsqueeze(0) # shape = (bs_size,1,len,len)
+        # Mask上三角
+        for i in range(avg_attention.shape[-1]):
+            for j in range(avg_attention.shape[-1]):
+                if j > i:  # j > i 表示在上三角部分
+                    avg_attention[:, :, i, j] = float("-inf")
+        # 归一化
+        avg_attention = nn.functional.softmax(avg_attention, dim=-1, dtype=torch.float32)
         res_entropy = get_attention_entropy(avg_attention) # shape = (bs_size,len)
-        mean_entropy = res_entropy[:,1:].mean()
+        mean_entropy = res_entropy[:,:,1:].mean()
         self.total_entropy.update(mean_entropy)
         logging.info(mean_entropy.item())
         return mean_entropy.item()
