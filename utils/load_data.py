@@ -2,8 +2,9 @@ import csv
 import ast
 from .meter import AverageMeter
 
-def load_token_levels(model_configs,data_type):
-    load_dir = "./exp" + "/MeanEntropy" + f"/{data_type}"
+def load_token_levels(model_configs,data_type,token_type="Mean"):
+    print(f"token_type == {token_type}")
+    load_dir = "./exp" + f"/{token_type}Entropy" + f"/{data_type}"
     token_levels = []
     exist_model_configs = []
     for model_config in model_configs:
@@ -11,6 +12,7 @@ def load_token_levels(model_configs,data_type):
         token_entropy = []
         try:
             with open(load_file, newline='') as csvfile:
+                print(f"loading file {load_file}")
                 exist_model_configs.append(model_config)
                 csvreader = csv.reader(csvfile)
                 # 逐行读取CSV文件的内容
@@ -19,10 +21,12 @@ def load_token_levels(model_configs,data_type):
             token_levels.append(token_entropy)
         except FileNotFoundError:
             print(f"{model_config[0]} not token_level")
-    return exist_model_configs, token_levels
+    return (token_levels,exist_model_configs)
 
-def load_sentence_levels(model_configs,data_type):
-    load_dir = "./exp" + "/SentenceEntropy" + f"/{data_type}"
+def load_sentence_levels(model_configs,data_type,sentence_type="Softmax"):
+    print(f"sentence_type == {sentence_type}")
+    load_dir = "./exp" + f"/{sentence_type}SentenceEntropy" + f"/{data_type}"
+        
     sentence_levels = []
     exist_model_configs = []
     for model_config in model_configs:
@@ -40,4 +44,4 @@ def load_sentence_levels(model_configs,data_type):
             sentence_levels.append(sentence_entropy)
         except FileNotFoundError:
             print(f"{model_config[0]} not sentence_level")
-    return exist_model_configs, sentence_levels
+    return (sentence_levels,exist_model_configs)

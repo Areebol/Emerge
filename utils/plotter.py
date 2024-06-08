@@ -68,17 +68,32 @@ def plot_sentence_entropy(title, model_configs,token_levels,sentence_levels):
         
 def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
     model_cfg = "./config/models_jq.yaml"
+    token_labels = ["AvgHeadSoftMaxMean","AvgHeadUnSoftMaxMean","Mean"]
+    sentence_labels = ["SoftMax","UnSoftMax"]
     # 加载模型s
     model_configs = []
     for key in model_familys:
         model_configs += load_config(model_cfg)[f"paths_{key}"]
     # 读取数据
-    _, token_levels = load_token_levels(model_configs,data_type)
-    models_configs, sentence_levels = load_sentence_levels(model_configs,data_type)
-    if models_configs:
-        save_path = f"./picture/tmp/{data_type}/{model_familys}"
+    token_levels = [load_token_levels(model_configs,data_type,token_label) for token_label in token_labels]
+    sentence_levels = [load_sentence_levels(model_configs,data_type,sentence_label) for sentence_label in sentence_labels]
+    if model_configs:
+        # token level
+        save_path = f"./picture/token_level/{data_type}/{model_familys}"
         os.makedirs(save_path,exist_ok=True)
-        # 绘图
-        plot_sentence_token_level("token_level_sentence_level",models_configs,token_levels,sentence_levels,save_path)
-        plot_level("token_level",model_configs,token_levels,save_path)
-        plot_level("sentence_level",model_configs,sentence_levels,save_path)
+        for token_label, token_level in zip(token_labels,token_levels):
+            plot_level(f"{token_label}_token_level",token_level[1],token_level[0],save_path)
+            
+        # sentence level
+        save_path = f"./picture/sentence_level/{data_type}/{model_familys}"
+        os.makedirs(save_path,exist_ok=True)
+        for sentence_label, sentence_level in zip(sentence_labels,sentence_levels):
+            plot_level(f"{sentence_label}_sentence_level",token_level[1],token_level[0],save_path)
+        
+        # fraction level
+        save_path = f"./picture/token_level_sentence_level/{data_type}/{model_familys}"
+        for token_label, token_level in zip(token_labels,token_levels):
+            for sentence_label, sentence_level in zip(sentence_labels,sentence_levels):
+                os.makedirs(save_path,exist_ok=True)
+                plot_sentence_token_level(f"{token_label}_{sentence_label}",token_level[1],token_level[0],sentence_level[0],save_path)
+                
