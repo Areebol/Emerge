@@ -42,13 +42,24 @@ def attention_entropy(attentions_record: tuple[tuple[torch.Tensor]], layer: int,
     head_entropy = torch.sum(- head_attention_matrix * torch.log(head_attention_matrix + 1e-20), dim=-1) / log_len
     return head_entropy
 
-def get_attention_entropy(attn_matrix,need_logN=True):
+def get_attention_entropy(attn_matrix,soft_max=True,avg_head=False):
     with torch.no_grad():
-        log_len = torch.log(torch.arange(start=1, end=attn_matrix.shape[-1]+1).repeat(attn_matrix.shape[0], 1)) + 1e-20
-        if need_logN:
-            head_entropy = torch.sum(- attn_matrix * torch.log(attn_matrix + 1e-20), dim=-1) / log_len
+        if soft_max==False:
+            # Mask上三角
+            for i in range(attn_matrix.shape[-1]):
+                for j in range(attn_matrix.shape[-1]):
+                    if j > i:  # j > i 表示在上三角部分
+                        attn_matrix[:, :, i, j] = float("-inf")
+            # 归一化
+            attn_matrix = nn.functional.softmax(attn_matrix, dim=-1, dtype=torch.float32)
+        if avg_head:
+            logging.info("Avg_head on entropy use")
+            attn_matrix= torch.mean(attn_matrix,dim=1).unsqueeze(1) # shape = (bs_size,len,len)
         else:
-            head_entropy = torch.sum(- attn_matrix * torch.log(attn_matrix + 1e-20), dim=-1)
+            logging.info("No Avg_head on entropy use")
+            
+        log_len = torch.log(torch.arange(start=1, end=attn_matrix.shape[-1]+1).repeat(attn_matrix.shape[0], 1)) + 1e-20
+        head_entropy = torch.sum(- attn_matrix * torch.log(attn_matrix + 1e-20), dim=-1) / log_len
         return head_entropy
 
 def response(tokenizer:AutoTokenizer, model:AutoModelForCausalLM, question:str, max_new_tokens:int=200):
