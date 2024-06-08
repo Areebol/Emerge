@@ -68,8 +68,12 @@ def plot_sentence_entropy(title, model_configs,token_levels,sentence_levels):
         
 def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
     model_cfg = "./config/models_jq.yaml"
-    token_labels = ["AvgHeadSoftMaxMean","AvgHeadUnSoftMaxMean","Mean"]
-    sentence_labels = ["SoftMax","UnSoftMax"]
+    token_labels = [
+                    "AvgHeadSoftMaxTokenEntropyProcessor","AvgHeadUnSoftMaxTokenEntropyProcessor",
+                    "SoftMaxTokenEntropyProcessor","UnSoftMaxTokenEntropyProcessor"]
+    sentence_labels = [
+                    "AvgHeadSoftMaxSentenceEntropyProcessor","AvgHeadUnSoftMaxSentenceEntropyProcessor",
+                    "SoftMaxSentenceEntropyProcessor","UnSoftMaxSentenceEntropyProcessor",]
     # 加载模型s
     model_configs = []
     for key in model_familys:

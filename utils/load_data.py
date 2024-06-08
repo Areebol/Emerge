@@ -4,7 +4,7 @@ from .meter import AverageMeter
 
 def load_token_levels(model_configs,data_type,token_type="Mean"):
     print(f"token_type == {token_type}")
-    load_dir = "./exp" + f"/{token_type}Entropy" + f"/{data_type}"
+    load_dir = "./exp" + f"/{token_type}" + f"/{data_type}"
     token_levels = []
     exist_model_configs = []
     for model_config in model_configs:
@@ -25,7 +25,7 @@ def load_token_levels(model_configs,data_type,token_type="Mean"):
 
 def load_sentence_levels(model_configs,data_type,sentence_type="Softmax"):
     print(f"sentence_type == {sentence_type}")
-    load_dir = "./exp" + f"/{sentence_type}SentenceEntropy" + f"/{data_type}"
+    load_dir = "./exp" + f"/{sentence_type}" + f"/{data_type}"
         
     sentence_levels = []
     exist_model_configs = []
