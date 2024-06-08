@@ -7,6 +7,8 @@ from data_loader.base_loader import BaseLoader
 class SentimentClassificationLoader(BaseLoader):
     def __init__(self) -> None:
         self.name = 'poem_sentiment_classification'
+    
+    def load_data(self, data_len: int=1000, seed: int=42, k_shots: int=15):
         dataset = datasets.load_dataset("poem_sentiment")
         label = {
             0:"negative",
@@ -21,8 +23,6 @@ class SentimentClassificationLoader(BaseLoader):
         self.all_data = [{"verse_text": d['verse_text'].strip().replace("\\n", " "), 
                           "label": label[d['label']]} 
                           for d in all_data if d['label']!=3]
-    
-    def load_data(self, data_len: int=1000, seed: int=42, k_shots: int=15):
         examplers: List[Dict] = self.all_data[:100]
         np.random.seed(seed)
         np.random.shuffle(examplers)
