@@ -7,11 +7,11 @@ data_loaders:
 - XsumLoader
 data_processors:
 - AvgHeadSoftMaxTokenEntropyProcessor
-- AvgHeadUnSoftMaxTokenEntropyProcessor
-- SoftMaxTokenEntropyProcessor
-- UnSoftMaxTokenEntropyProcessor
-- AvgHeadSoftMaxSentenceEntropyProcessor
-- AvgHeadUnSoftMaxSentenceEntropyProcessor
-- SoftMaxSentenceEntropyProcessor
-- UnSoftMaxSentenceEntropyProcessor
+# - AvgHeadUnSoftMaxTokenEntropyProcessor
+# - SoftMaxTokenEntropyProcessor
+# - UnSoftMaxTokenEntropyProcessor
+# - AvgHeadSoftMaxSentenceEntropyProcessor
+# - AvgHeadUnSoftMaxSentenceEntropyProcessor
+# - SoftMaxSentenceEntropyProcessor
+# - UnSoftMaxSentenceEntropyProcessor
     

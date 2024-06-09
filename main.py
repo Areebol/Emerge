@@ -11,7 +11,7 @@ import torch
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--cfg", default="./config/qwen.yaml", help="config file path")
-    parser.add_argument("--start", default = 0, type=int, help="config file path")
+    parser.add_argument("--start", default = 9, type=int, help="config file path")
     parser.add_argument("--model_cfg", default="./config/models_pz.yaml", help="model config file path")
     args = parser.parse_args()
 

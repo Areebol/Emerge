@@ -54,7 +54,7 @@ def get_attention_entropy(attn_matrix,soft_max=True,avg_head=False):
             attn_matrix = nn.functional.softmax(attn_matrix, dim=-1, dtype=torch.float32)
         if avg_head:
             logging.info("Avg_head on entropy use")
-            attn_matrix= torch.mean(attn_matrix,dim=1).unsqueeze(1) # shape = (bs_size,len,len)
+            attn_matrix= torch.mean(attn_matrix,dim=1).unsqueeze(1) # shape = (bs_size,#heads,len,len)
         else:
             logging.info("No Avg_head on entropy use")
             

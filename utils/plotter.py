@@ -92,12 +92,11 @@ def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
         save_path = f"./picture/sentence_level/{data_type}/{model_familys}"
         os.makedirs(save_path,exist_ok=True)
         for sentence_label, sentence_level in zip(sentence_labels,sentence_levels):
-            plot_level(f"{sentence_label}_sentence_level",token_level[1],token_level[0],save_path)
+            plot_level(f"{sentence_label}_sentence_level",sentence_level[1],sentence_level[0],save_path)
         
         # fraction level
         save_path = f"./picture/token_level_sentence_level/{data_type}/{model_familys}"
-        for token_label, token_level in zip(token_labels,token_levels):
-            for sentence_label, sentence_level in zip(sentence_labels,sentence_levels):
-                os.makedirs(save_path,exist_ok=True)
-                plot_sentence_token_level(f"{token_label}_{sentence_label}",token_level[1],token_level[0],sentence_level[0],save_path)
-                
+        for token_label, token_level, sentence_label,sentence_level in zip(token_labels,token_levels,sentence_labels,sentence_levels):
+            os.makedirs(save_path,exist_ok=True)
+            plot_sentence_token_level(f"{token_label}_{sentence_label}",token_level[1],token_level[0],sentence_level[0],save_path)
+            
