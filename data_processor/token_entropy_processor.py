@@ -86,7 +86,7 @@ class AvgHeadSoftMaxTokenEntropyProcessor(BaseProcessor):
     def process_data(self, index, data, model_generate,split_words=None):
         logging.info(f"{self.name} process data")
         res = model_generate['generate']
-        attentions = res["attentions"][0][0].cpu()
+        attentions = res["attentions"][0][0].to(torch.float32).cpu()
         res_entropy = get_attention_entropy(attentions,avg_head=True) # shape = (bs_size,len)
         mean_entropy = res_entropy[:,:,1:].mean()
         self.total_entropy.update(mean_entropy)
