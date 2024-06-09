@@ -1,7 +1,7 @@
 # 启动Clash脚本命令
 # /share/home/zhangshuhai/ogsp/emerge/clash/clash-linux-amd64
 # export http_proxy=127.0.0.1:7890 && export https_proxy=127.0.0.1:7890 && curl www.google.com
-# export HF_ENDPOINT=https://hf-mirror.com
+export HF_ENDPOINT=https://hf-mirror.com
 duration=3600  # 1hr
 
 num_iterations=100

@@ -1,5 +1,5 @@
 model_familys:
-- qwen
+- qwen_1.5
 data_loaders:
 - CotLoader
 - SentimentClassificationLoader
