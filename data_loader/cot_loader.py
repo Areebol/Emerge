@@ -104,5 +104,5 @@ class CotLoader(BaseLoader):
         logging.info(f"Loading data {self.name} ...") 
         
         # Cot_examples = no_cot_examples+cot_examples + cot_shut_examples
-        Cot_examples = [element for trio in zip(no_cot_examples, cot_examples, cot_examples) for element in trio]
+        Cot_examples = [element for trio in zip(no_cot_examples, cot_shut_examples, cot_shut_examples) for element in trio]
         return Cot_examples[:data_len]

@@ -1,6 +1,6 @@
 paths_llama_2:
 - - llama2_7b
-  - /share/public/hf_models/Llama-2-7b-hf
+  - /U_20240603_ZSH_SMIL/LLM/models--meta-llama--Llama-2-7b-hf/snapshots/01c7f73d771dfac7d292323805ebc428287df4f9
   - llama2
   - 7
 - - llama2_chat_7b
@@ -8,7 +8,7 @@ paths_llama_2:
   - llama2
   - 7
 - - llama2_13b
-  - /share/public/hf_models/Llama-2-13b-hf
+  - /U_20240603_ZSH_SMIL/LLM/models--meta-llama--Llama-2-13b-hf/snapshots/5c31dfb671ce7cfe2d7bb7c04375e44c55e815b1
   - llama2
   - 13
 - - llama2_chat_13b
@@ -20,7 +20,7 @@ paths_llama_2:
   - llama2
   - 70
 - - llama2_chat_70b
-  - /U_20240603_ZSH_SMIL/LLM/models--meta-llama--Llama-2-70b-chat-hf/snapshots/e9149a12809580e8602995856f8098ce973d1080
+  - /U_20240603_ZSH_SMIL/LLM/Llama-2-70b-chat-hf
   - llama2
   - 70
 paths_llama_code:

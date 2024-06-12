@@ -1,13 +1,17 @@
 model_familys:
 - qwen_1
 data_loaders:
+- CotLoader
 - SentimentClassificationLoader
 - HC3HumanLoader
 - XsumLoader
-- CotLoader
 data_processors:
-- AvgHeadSoftMaxMeanEntropyProcessor
-- AvgHeadUnSoftMaxMeanEntropyProcessor
-- MeanEntropyProcessor
-- SentenceEntropySoftMaxProcessor
-- SentenceEntropyUnSoftMaxProcessor
+- AvgHeadSoftMaxTokenEntropyProcessor
+- AvgHeadUnSoftMaxTokenEntropyProcessor
+- SoftMaxTokenEntropyProcessor
+- UnSoftMaxTokenEntropyProcessor
+- AvgHeadSoftMaxSentenceEntropyProcessor
+- AvgHeadUnSoftMaxSentenceEntropyProcessor
+- SoftMaxSentenceEntropyProcessor
+- UnSoftMaxSentenceEntropyProcessor
+    
