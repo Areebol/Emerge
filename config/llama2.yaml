@@ -1,16 +1,23 @@
 model_familys:
 - llama_2
 data_loaders:
-# - CotLoader
-# - SentimentClassificationLoader
+- CotLoader
+- SentimentClassificationLoader
 - HC3HumanLoader
-# - XsumLoader
+- XsumLoader
 data_processors:
-# - AvgHeadSoftMaxTokenEntropyProcessor
-# - AvgHeadUnSoftMaxTokenEntropyProcessor
-# - SoftMaxTokenEntropyProcessor
-# - UnSoftMaxTokenEntropyProcessor
-# - AvgHeadSoftMaxSentenceEntropyProcessor
-- AvgHeadUnSoftMaxSentenceEntropyProcessor
-# - SoftMaxSentenceEntropyProcessor
-# - UnSoftMaxSentenceEntropyProcessor
+- v1AvgHeadSoftMaxSentenceEntropyProcessor
+- v1SoftMaxSentenceEntropyProcessor
+- v1UnSoftMaxSentenceEntropyProcessor
+- v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor
+- v1ColumnSoftMaxSentenceEntropyProcessor
+- v1ColumnUnSoftMaxSentenceEntropyProcessor
+- v1FixedAvgHeadSoftMaxSentenceEntropyProcessor
+- v1FixedSoftMaxSentenceEntropyProcessor
+- v1FixedUnSoftMaxSentenceEntropyProcessor
+- v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor
+- v1ColumnFixedSoftMaxSentenceEntropyProcessor
+- v1ColumnFixedUnSoftMaxSentenceEntropyProcessor
+- AvgHeadSoftMaxTokenEntropyProcessor
+- SoftMaxTokenEntropyProcessor
+- UnSoftMaxTokenEntropyProcessor

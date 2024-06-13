@@ -8,9 +8,16 @@ __all__ = [
     # Sentence processor
     "AvgHeadSoftMaxSentenceEntropyProcessor","AvgHeadUnSoftMaxSentenceEntropyProcessor",
     "SoftMaxSentenceEntropyProcessor","UnSoftMaxSentenceEntropyProcessor",
+    
     # Sentence processor v1
     "v1AvgHeadSoftMaxSentenceEntropyProcessor","v1SoftMaxSentenceEntropyProcessor","v1UnSoftMaxSentenceEntropyProcessor",
-    "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor"
+    
+    "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor","v1ColumnSoftMaxSentenceEntropyProcessor","v1ColumnUnSoftMaxSentenceEntropyProcessor",
+    
+    "v1FixedAvgHeadSoftMaxSentenceEntropyProcessor","v1FixedSoftMaxSentenceEntropyProcessor","v1FixedUnSoftMaxSentenceEntropyProcessor",
+
+    "v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor","v1ColumnFixedSoftMaxSentenceEntropyProcessor","v1ColumnFixedUnSoftMaxSentenceEntropyProcessor",
+    
     # Token processor
     "AvgHeadSoftMaxTokenEntropyProcessor","AvgHeadUnSoftMaxTokenEntropyProcessor",
     "SoftMaxTokenEntropyProcessor","UnSoftMaxTokenEntropyProcessor",
