@@ -6,18 +6,18 @@ data_loaders:
 - HC3HumanLoader
 - XsumLoader
 data_processors:
-- v1AvgHeadSoftMaxSentenceEntropyProcessor
-- v1SoftMaxSentenceEntropyProcessor
-- v1UnSoftMaxSentenceEntropyProcessor
-- v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor
-- v1ColumnSoftMaxSentenceEntropyProcessor
-- v1ColumnUnSoftMaxSentenceEntropyProcessor
-- v1FixedAvgHeadSoftMaxSentenceEntropyProcessor
-- v1FixedSoftMaxSentenceEntropyProcessor
-- v1FixedUnSoftMaxSentenceEntropyProcessor
-- v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor
-- v1ColumnFixedSoftMaxSentenceEntropyProcessor
-- v1ColumnFixedUnSoftMaxSentenceEntropyProcessor
-- AvgHeadSoftMaxTokenEntropyProcessor
+# - v1AvgHeadSoftMaxSentenceEntropyProcessor
+# - v1SoftMaxSentenceEntropyProcessor
+# - v1UnSoftMaxSentenceEntropyProcessor
+# - v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor
+# - v1ColumnSoftMaxSentenceEntropyProcessor
+# - v1ColumnUnSoftMaxSentenceEntropyProcessor
+# - v1FixedAvgHeadSoftMaxSentenceEntropyProcessor
+# - v1FixedSoftMaxSentenceEntropyProcessor
+# - v1FixedUnSoftMaxSentenceEntropyProcessor
+# - v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor
+# - v1ColumnFixedSoftMaxSentenceEntropyProcessor
+# - v1ColumnFixedUnSoftMaxSentenceEntropyProcessor
+# - AvgHeadSoftMaxTokenEntropyProcessor
 - SoftMaxTokenEntropyProcessor
 - UnSoftMaxTokenEntropyProcessor

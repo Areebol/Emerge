@@ -42,7 +42,7 @@ class v1SentenceEntropyProcessor(BaseProcessor):
         hidden_states = weighted_hidden_states(weights,token_ids,res)        
 
         # 计算attention矩阵
-        attn_matrix = get_attention_matrix(encoder,hidden_states,soft_max=self.soft_max).to(torch.float32)
+        attn_matrix = get_attention_matrix(encoder,hidden_states,soft_max=self.soft_max).squeeze(0).to(torch.float32)
         
         # 计算entropy
         with torch.no_grad():
