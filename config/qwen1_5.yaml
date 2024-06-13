@@ -6,7 +6,8 @@ data_loaders:
 - HC3HumanLoader
 - XsumLoader
 data_processors:
-- AvgHeadSoftMaxTokenEntropyProcessor
+- v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor
+# - AvgHeadSoftMaxTokenEntropyProcessor
 # - AvgHeadUnSoftMaxTokenEntropyProcessor
 # - SoftMaxTokenEntropyProcessor
 # - UnSoftMaxTokenEntropyProcessor

@@ -238,7 +238,7 @@ def get_attention_matrix_k_to_last(self,res,k=1,soft_max=True):
     encoder_k_to_last = get_encoder_k(self,-k)
     return get_attention_matrix(encoder_k_to_last,hidden_states,soft_max=soft_max)
 
-def split_attention_matrix(attn_matrix,split_ids):
+def split_attention_matrix(attn_matrix,split_ids,is_column=False):
     """
     切分attention_matrix
     返回切分后的sub attn_matrix
@@ -259,7 +259,10 @@ def split_attention_matrix(attn_matrix,split_ids):
         end_ids.append(attn_matrix.shape[-1]-1)
         
     for end_id in end_ids:
-        sub_matrix = attn_matrix[:,:,start_id:end_id+1,start_id:end_id+1]
+        if is_column:
+            sub_matrix = attn_matrix[:,:,:,start_id:end_id+1]
+        else:
+            sub_matrix = attn_matrix[:,:,start_id:end_id+1,start_id:end_id+1]
         sub_token_ids = np.arange(start_id,end_id+1)
         split_attn_matrixs.append(sub_matrix)
         split_tokens_indexs.append(sub_token_ids)
@@ -299,11 +302,11 @@ def weighted_hidden_states(weights,token_ids,res):
         weighted_hidden_states.append(torch.sum(weighted_states,dim=1))
     return torch.stack(weighted_hidden_states,dim=1)
 
-def split_attn_matrix(model,res,sort_splits,soft_max=True):
+def split_attn_matrix(model,res,sort_splits,soft_max=True,is_column=False):
     # 计算最后一层attention矩阵
     attn_matrix = get_attention_matrix_k_to_last(model,res,k=1,soft_max=soft_max)
     # 切割attention矩阵为sentence子矩阵
-    sentence_attn_matrixs,token_ids = split_attention_matrix(attn_matrix,sort_splits)
+    sentence_attn_matrixs,token_ids = split_attention_matrix(attn_matrix,sort_splits,is_column)
     # 计算各个attn_matrix的权重
     weights = get_token_weights(sentence_attn_matrixs)
     return weights,token_ids
