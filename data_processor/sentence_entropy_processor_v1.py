@@ -13,7 +13,7 @@ class v1SentenceEntropyProcessor(BaseProcessor):
         self.soft_max = True
         self.avg_head = True
         self.sentence_size = None
-        self.is_column = True
+        self.is_column = False
         self.total_entropy = AverageMeter()
 
     def process_data(self, index, data, model_generate,split_words=None):
@@ -47,9 +47,10 @@ class v1SentenceEntropyProcessor(BaseProcessor):
         # 计算entropy
         with torch.no_grad():
             sentence_entropy = get_attention_entropy(attn_matrix.cpu(),soft_max=self.soft_max,avg_head=self.avg_head)
-            mean_sentence_entropy = torch.mean(sentence_entropy,dim=0).squeeze()
             if self.avg_head == False:
-                mean_sentence_entropy = torch.mean(mean_sentence_entropy,dim=0).squeeze()
+                mean_sentence_entropy = torch.mean(sentence_entropy,dim=0).squeeze()
+            else:
+                mean_sentence_entropy = sentence_entropy.squeeze(0)
         return mean_sentence_entropy.tolist()
 
     def append_data_to_csv(self, data):

@@ -19,5 +19,5 @@ data_processors:
 - v1ColumnFixedSoftMaxSentenceEntropyProcessor
 - v1ColumnFixedUnSoftMaxSentenceEntropyProcessor
 - AvgHeadSoftMaxTokenEntropyProcessor
+- AvgHeadUnSoftMaxTokenEntropyProcessor
 - SoftMaxTokenEntropyProcessor
-- UnSoftMaxTokenEntropyProcessor    

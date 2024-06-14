@@ -88,7 +88,7 @@ class AvgHeadSoftMaxTokenEntropyProcessor(BaseProcessor):
         res = model_generate['generate']
         attentions = res["attentions"][0][0].to(torch.float32).cpu()
         res_entropy = get_attention_entropy(attentions,avg_head=True) # shape = (bs_size,len)
-        mean_entropy = res_entropy[:,:,1:].mean()
+        mean_entropy = res_entropy[:,1:].mean()
         self.total_entropy.update(mean_entropy)
         logging.info(mean_entropy.item())
         return mean_entropy.item()
@@ -126,7 +126,7 @@ class AvgHeadUnSoftMaxTokenEntropyProcessor(BaseProcessor):
         # 手动计算最后一层的attention weight
         attentions = get_attention_matrix(encoder,hidden_state,soft_max=False).to(torch.float32).squeeze(0).cpu() # shape = (bs_size,#heads,len,len)
         res_entropy = get_attention_entropy(attentions,avg_head=True,soft_max=False) # shape = (bs_size,len)
-        mean_entropy = res_entropy[:,:,1:].mean()
+        mean_entropy = res_entropy[:,1:].mean()
         self.total_entropy.update(mean_entropy)
         logging.info(mean_entropy.item())
         return mean_entropy.item()

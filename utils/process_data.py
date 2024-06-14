@@ -54,7 +54,7 @@ def get_attention_entropy(attn_matrix,soft_max=True,avg_head=False):
             attn_matrix = nn.functional.softmax(attn_matrix, dim=-1, dtype=torch.float32)
         if avg_head:
             logging.info("Avg_head on entropy use")
-            attn_matrix= torch.mean(attn_matrix,dim=1).unsqueeze(1) # shape = (bs_size,#heads,len,len)
+            attn_matrix= torch.mean(attn_matrix,dim=0).unsqueeze(0) # shape = (#heads,len,len)
         else:
             logging.info("No Avg_head on entropy use")
             
@@ -269,7 +269,7 @@ def split_attention_matrix(attn_matrix,split_ids,is_column=False):
         start_id = end_id+1
     return split_attn_matrixs,split_tokens_indexs
 
-def get_token_weight(attn_matrix):
+def get_token_weight(attn_matrix,token_id):
     num_head,q_len = attn_matrix.shape[-3],attn_matrix.shape[-1]
     if q_len<=1:
         return torch.tensor(1)
@@ -280,18 +280,21 @@ def get_token_weight(attn_matrix):
         token_weight = []
         mean_attn_matrix = attn_matrix[:,head_id,:,:].squeeze()
         for i in range(q_len):
-            token_weight.append(torch.sum(mean_attn_matrix[:,i])/(q_len-i))
+            if mean_attn_matrix.shape[-1]==mean_attn_matrix.shape[-2]:
+                token_weight.append(torch.sum(mean_attn_matrix[:,i])/(q_len-i))
+            else:
+                token_weight.append(torch.sum(mean_attn_matrix[token_id[i]:,i])/(mean_attn_matrix.shape[-2]-token_id[i]))
         token_weight = torch.tensor(token_weight)
         # 归一化
         token_weight = nn.functional.softmax(token_weight, dim=-1, dtype=torch.float32)
         total_token_weight += token_weight
     return total_token_weight / q_len
 
-def get_token_weights(attn_matrixs):
+def get_token_weights(attn_matrixs,token_ids):
     """计算矩阵的权重"""
     token_weights = []
-    for attn_matrix in attn_matrixs:
-        token_weights.append(get_token_weight(attn_matrix))
+    for attn_matrix,token_id in zip(attn_matrixs,token_ids):
+        token_weights.append(get_token_weight(attn_matrix,token_id)) # shape = (bs_size,#heads,#total_token,#seq_token)
     return token_weights
 
 def weighted_hidden_states(weights,token_ids,res):
@@ -308,5 +311,5 @@ def split_attn_matrix(model,res,sort_splits,soft_max=True,is_column=False):
     # 切割attention矩阵为sentence子矩阵
     sentence_attn_matrixs,token_ids = split_attention_matrix(attn_matrix,sort_splits,is_column)
     # 计算各个attn_matrix的权重
-    weights = get_token_weights(sentence_attn_matrixs)
+    weights = get_token_weights(sentence_attn_matrixs,token_ids)
     return weights,token_ids
