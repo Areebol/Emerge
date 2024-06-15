@@ -10,13 +10,13 @@ __all__ = [
     "SoftMaxSentenceEntropyProcessor","UnSoftMaxSentenceEntropyProcessor",
     
     # Sentence processor v1
-    "v1AvgHeadSoftMaxSentenceEntropyProcessor","v1SoftMaxSentenceEntropyProcessor","v1UnSoftMaxSentenceEntropyProcessor",
+    "v1AvgHeadSoftMaxSentenceEntropyProcessor","v1SoftMaxSentenceEntropyProcessor","v1UnSoftMaxSentenceEntropyProcessor","v1AvgHeadUnSoftMaxTokenEntropyProcessor"
     
-    "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor","v1ColumnSoftMaxSentenceEntropyProcessor","v1ColumnUnSoftMaxSentenceEntropyProcessor",
+    "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor","v1ColumnSoftMaxSentenceEntropyProcessor","v1ColumnUnSoftMaxSentenceEntropyProcessor","v1ColumnAvgHeadUnSoftMaxTokenEntropyProcessor"
     
-    "v1FixedAvgHeadSoftMaxSentenceEntropyProcessor","v1FixedSoftMaxSentenceEntropyProcessor","v1FixedUnSoftMaxSentenceEntropyProcessor",
+    "v1FixedAvgHeadSoftMaxSentenceEntropyProcessor","v1FixedSoftMaxSentenceEntropyProcessor","v1FixedUnSoftMaxSentenceEntropyProcessor","v1FixedAvgHeadUnSoftMaxTokenEntropyProcessor"
 
-    "v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor","v1ColumnFixedSoftMaxSentenceEntropyProcessor","v1ColumnFixedUnSoftMaxSentenceEntropyProcessor",
+    "v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor","v1ColumnFixedSoftMaxSentenceEntropyProcessor","v1ColumnFixedUnSoftMaxSentenceEntropyProcessor","v1ColumnFixedAvgHeadUnSoftMaxTokenEntropyProcessor"
     
     # Token processor
     "AvgHeadSoftMaxTokenEntropyProcessor","AvgHeadUnSoftMaxTokenEntropyProcessor",

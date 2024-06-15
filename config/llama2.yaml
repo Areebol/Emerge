@@ -8,16 +8,16 @@ data_loaders:
 data_processors:
 - v1AvgHeadSoftMaxSentenceEntropyProcessor
 - v1SoftMaxSentenceEntropyProcessor
-- v1UnSoftMaxSentenceEntropyProcessor
+- v1AvgHeadUnSoftMaxSentenceEntropyProcessor
 - v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor
 - v1ColumnSoftMaxSentenceEntropyProcessor
-- v1ColumnUnSoftMaxSentenceEntropyProcessor
+- v1ColumnAvgHeadUnSoftMaxSentenceEntropyProcessor
 - v1FixedAvgHeadSoftMaxSentenceEntropyProcessor
 - v1FixedSoftMaxSentenceEntropyProcessor
-- v1FixedUnSoftMaxSentenceEntropyProcessor
+- v1FixedAvgHeadUnSoftMaxSentenceEntropyProcessor
 - v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor
 - v1ColumnFixedSoftMaxSentenceEntropyProcessor
-- v1ColumnFixedUnSoftMaxSentenceEntropyProcessor
+- v1ColumnFixedAvgHeadUnSoftMaxSentenceEntropyProcessor
 - AvgHeadSoftMaxTokenEntropyProcessor
 - AvgHeadUnSoftMaxTokenEntropyProcessor
 - SoftMaxTokenEntropyProcessor

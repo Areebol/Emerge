@@ -78,6 +78,14 @@ class v1AvgHeadSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
         self.soft_max = True
         self.avg_head = True
         logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
+
+class v1AvgHeadUnSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
+    def __init__(self, model, tokenizer, model_config):
+        v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)
+        self.name = "v1AvgHeadUnSoftMaxSentenceEntropyProcessor"
+        self.soft_max = False
+        self.avg_head = True
+        logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
         
 class v1SoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
     def __init__(self, model, tokenizer, model_config):
@@ -101,6 +109,15 @@ class v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor)
         v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)
         self.name = "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor"
         self.soft_max = True
+        self.avg_head = True
+        self.is_column = True
+        logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
+        
+class v1ColumnAvgHeadUnSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
+    def __init__(self, model, tokenizer, model_config):
+        v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)
+        self.name = "v1ColumnAvgHeadUnSoftMaxSentenceEntropyProcessor"
+        self.soft_max = False
         self.avg_head = True
         self.is_column = True
         logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
@@ -133,6 +150,15 @@ class v1FixedAvgHeadSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
         self.avg_head = True
         logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
 
+class v1FixedAvgHeadUnSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
+    def __init__(self, model, tokenizer, model_config):
+        v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)
+        self.sentence_size = 8
+        self.name = f"v1Size{self.sentence_size}AvgHeadUnSoftMaxSentenceEntropyProcessor"
+        self.soft_max = False
+        self.avg_head = True
+        logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
+
 class v1FixedSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
     def __init__(self, model, tokenizer, model_config):
         v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)
@@ -162,6 +188,16 @@ class v1ColumnFixedAvgHeadSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProce
         self.is_column = True
         logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
 
+class v1ColumnFixedAvgHeadUnSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
+    def __init__(self, model, tokenizer, model_config):
+        v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)
+        self.sentence_size = 8
+        self.name = f"v1Size{self.sentence_size}ColumnAvgHeadUnSoftMaxSentenceEntropyProcessor"
+        self.soft_max = False
+        self.avg_head = True
+        self.is_column = True
+        logging.info(f"Init {self.name} : [soft_max : {self.soft_max} avg_head : {self.avg_head}]")
+        
 class v1ColumnFixedSoftMaxSentenceEntropyProcessor(v1SentenceEntropyProcessor):
     def __init__(self, model, tokenizer, model_config):
         v1SentenceEntropyProcessor.__init__(self, model, tokenizer, model_config)

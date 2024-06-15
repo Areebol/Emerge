@@ -69,11 +69,23 @@ def plot_sentence_entropy(title, model_configs,token_levels,sentence_levels):
 def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
     model_cfg = "./config/models_jq.yaml"
     token_labels = [
-                    "AvgHeadSoftMaxTokenEntropyProcessor","AvgHeadUnSoftMaxTokenEntropyProcessor",
-                    "SoftMaxTokenEntropyProcessor","UnSoftMaxTokenEntropyProcessor"]
+                    "AvgHeadSoftMaxTokenEntropyProcessor",
+                    "AvgHeadUnSoftMaxTokenEntropyProcessor",
+                    "SoftMaxTokenEntropyProcessor"]
     sentence_labels = [
-                    "AvgHeadSoftMaxSentenceEntropyProcessor","AvgHeadUnSoftMaxSentenceEntropyProcessor",
-                    "SoftMaxSentenceEntropyProcessor","UnSoftMaxSentenceEntropyProcessor",]
+                    "v1AvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1SoftMaxSentenceEntropyProcessor",
+                    "v1UnSoftMaxSentenceEntropyProcessor",
+                    "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1ColumnSoftMaxSentenceEntropyProcessor",
+                    "v1ColumnUnSoftMaxSentenceEntropyProcessor",
+                    "v1Size8AvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1Size8SoftMaxSentenceEntropyProcessor",
+                    "v1Size8UnSoftMaxSentenceEntropyProcessor",
+                    "v1Size8ColumnAvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1Size8ColumnSoftMaxSentenceEntropyProcessor",
+                    "v1Size8ColumnUnSoftMaxSentenceEntropyProcessor"
+                    ]
     # 加载模型s
     model_configs = []
     for key in model_familys:
@@ -96,7 +108,10 @@ def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
         
         # fraction level
         save_path = f"./picture/token_level_sentence_level/{data_type}/{model_familys}"
-        for token_label, token_level, sentence_label,sentence_level in zip(token_labels,token_levels,sentence_labels,sentence_levels):
+        for i in range(12):
+            sentence_label, sentence_level = sentence_labels[i],sentence_levels[i]
+            token_label = token_labels[i%3]
+            token_level = token_levels[i%3]
             os.makedirs(save_path,exist_ok=True)
             plot_sentence_token_level(f"{token_label}_{sentence_label}",token_level[1],token_level[0],sentence_level[0],save_path)
             
