@@ -74,17 +74,17 @@ def plot_family_data(model_familys=["llama_2"],data_type="xsum_examples"):
                     "SoftMaxTokenEntropyProcessor"]
     sentence_labels = [
                     "v1AvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1AvgHeadUnSoftMaxSentenceEntropyProcessor",
                     "v1SoftMaxSentenceEntropyProcessor",
-                    "v1UnSoftMaxSentenceEntropyProcessor",
                     "v1ColumnAvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1ColumnAvgHeadUnSoftMaxSentenceEntropyProcessor",
                     "v1ColumnSoftMaxSentenceEntropyProcessor",
-                    "v1ColumnUnSoftMaxSentenceEntropyProcessor",
                     "v1Size8AvgHeadSoftMaxSentenceEntropyProcessor",
+                    "v1Size8AvgHeadUnSoftMaxSentenceEntropyProcessor",
                     "v1Size8SoftMaxSentenceEntropyProcessor",
-                    "v1Size8UnSoftMaxSentenceEntropyProcessor",
                     "v1Size8ColumnAvgHeadSoftMaxSentenceEntropyProcessor",
-                    "v1Size8ColumnSoftMaxSentenceEntropyProcessor",
-                    "v1Size8ColumnUnSoftMaxSentenceEntropyProcessor"
+                    "v1Size8ColumnAvgHeadUnSoftMaxSentenceEntropyProcessor",
+                    "v1Size8ColumnSoftMaxSentenceEntropyProcessor"
                     ]
     # 加载模型s
     model_configs = []
