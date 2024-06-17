@@ -5,7 +5,7 @@ class XsumLoader(BaseLoader):
     def __init__(self):
         self.name = "xsum_examples"
 
-    def load_data(self, data_len = 200):
+    def load_data(self, data_len = 2000):
         import os
         os.environ['HF_ENDPOINT']='https://hf-mirror.com'
         from datasets import load_dataset
