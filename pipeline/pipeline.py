@@ -12,7 +12,7 @@ class Pipeline:
         self.model_config = model_config
         self.data_loaders = data_loaders
         self.data_processors = data_processors
-        self.min_input_token = 700
+        self.min_input_token = 50
         self.max_input_token = 2000
         self.max_sample = 50
 
@@ -35,7 +35,7 @@ class Pipeline:
                     logging.info(f"num_input_token {num_input_token} less than min_input_token {self.min_input_token} or greater than max_input_token {self.max_input_token}")
                     continue
                 # pre process
-                model_generate = get_model_generate(self.tokenizer,self.model,data,max_new_tokens=1,max_input_token=2000,split_words=split_words)
+                model_generate = get_model_generate(self.tokenizer,self.model,data,max_new_tokens=1,max_input_token=400,split_words=split_words)
                 index += 1 
                 # data_processors
                 for data_processor in self.data_processors:

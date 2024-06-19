@@ -5,7 +5,7 @@ import re
 
 def load_token_levels(model_configs,data_type,token_type="Mean"):
     print(f"token_type == {token_type}")
-    exp_dir = "./exp/700"
+    exp_dir = "./exp"
     load_dir = exp_dir + f"/{token_type}" + f"/{data_type}"
     token_levels = []
     exist_model_configs = []
@@ -27,7 +27,7 @@ def load_token_levels(model_configs,data_type,token_type="Mean"):
 
 def load_sentence_levels(model_configs,data_type,sentence_type="Softmax"):
     print(f"sentence_type == {sentence_type}")
-    exp_dir = "./exp/700"
+    exp_dir = "./exp"
     load_dir = exp_dir + f"/{sentence_type}" + f"/{data_type}"
         
     sentence_levels = []

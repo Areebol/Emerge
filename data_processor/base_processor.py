@@ -6,7 +6,7 @@ class BaseProcessor:
         self.tokenizer = tokenizer
         self.model_config = model_config
         self.max_sample = 50
-        self.exp_dir = "./exp/700/"
+        self.exp_dir = "./exp"
         
     def process(self, index, data, model_generate,split_words=None):
         if index > self.max_sample:
