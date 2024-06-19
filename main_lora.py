@@ -22,7 +22,7 @@ if __name__ == "__main__":
     # load config 
     config = load_config(args.cfg)
     model_cfg = load_config(args.model_cfg)
-    for step in range(1,30):
+    for step in range(15,30):
         model_config = [f'llama2_13B_ft_{step}','xxx','llama2',step]
         print(f"Loading model: checkpoint-{step}000")
         model, tokenizer = load_merge_model_tokenizer(lora_model_name = f'checkpoint-{step}000')
