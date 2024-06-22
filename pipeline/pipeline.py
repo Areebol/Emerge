@@ -19,6 +19,7 @@ class Pipeline:
 
     def run(self):
         logging.info("Pipeline start")
+        self.model.eval()
         with torch.no_grad():
             # data_loaders
             for data_loader in self.data_loaders:

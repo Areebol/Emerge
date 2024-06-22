@@ -46,7 +46,7 @@ def load_model_tokenizer(model_config=None,half_models=['12b','13b','14b','32b',
 def load_merge_model_tokenizer(base_model_path = '/U_20240603_ZSH_SMIL/LLM/models--meta-llama--Llama-2-13b-hf/snapshots/5c31dfb671ce7cfe2d7bb7c04375e44c55e815b1',
                      lora_model_base_dir  = '/U_20240603_ZSH_SMIL/MedicalGPT/outputs-sft-llama2-13b-epoch10-v1',
                      lora_model_name = 'checkpoint-1000',
-                     model_type = 'llama'):
+                     model_type = 'auto'):
     tokenizer = AutoTokenizer.from_pretrained(base_model_path, fast_tokenizer=True, trust_remote_code=True)
     tokenizer.pad_token = tokenizer.eos_token
     config = AutoConfig.from_pretrained(base_model_path, output_attentions=True, attn_implementation="eager", trust_remote_code=True)
